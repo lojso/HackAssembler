@@ -4,20 +4,16 @@ using NUnit.Framework;
 
 namespace AssemblerTest
 {
-    public class Tests
+    public class Arguments
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [Test] public void MultipleArguments()
+        [Test]
+        public void MultipleArguments()
         {
             string[] args = {"AssemblerTest.dll", "PlusOne"};
             
-            var arguments = new Arguments(args);
+            var arguments = new HackAssembler.Arguments(args);
             
-            Assert.Pass();
+            Assert.True(arguments.Path.Equals("AssemblerTest.dll"));
         }
 
         [Test]
@@ -25,7 +21,7 @@ namespace AssemblerTest
         {
             string[] args = {"AssemblerTest.dll"};
             
-            var arguments = new Arguments(args);
+            var arguments = new HackAssembler.Arguments(args);
             
             Assert.Pass();
         }
@@ -35,7 +31,7 @@ namespace AssemblerTest
         {
             string[] args = {"../netcoreapp3.1/AssemblerTest.dll"};
             
-            var arguments = new Arguments(args);
+            var arguments = new HackAssembler.Arguments(args);
             
             Assert.Pass();
         }
@@ -45,7 +41,7 @@ namespace AssemblerTest
         {
             string[] args = {@"E:\Repos\HackAssembler\AssemblerTest\bin\Debug\netcoreapp3.1\AssemblerTest.dll"};
             
-            var arguments = new Arguments(args);
+            var arguments = new HackAssembler.Arguments(args);
             
             Assert.Pass();
         }
@@ -53,19 +49,21 @@ namespace AssemblerTest
         [Test]
         public void IncorrectPath()
         {
-            Assert.Throws(typeof(ArgumentException), () => new Arguments(new[] {"Nope"}));
+            Assert.Throws(typeof(ArgumentException), () => new HackAssembler.Arguments(new[] {"Nope"}));
         }
         
         [Test]
         public void EmptyPath()
         {
-            Assert.Throws(typeof(ArgumentException), () => new Arguments(new[] {""}));
+            Assert.Throws(typeof(ArgumentException), () => new HackAssembler.Arguments(new[] {""}));
         }
+        
+        
         
         [Test]
         public void EmptyArguments()
         {
-            Assert.Throws(typeof(ArgumentException), () => new Arguments(new string[] {}));
+            Assert.Throws(typeof(ArgumentException), () => new HackAssembler.Arguments(new string[] {}));
         }
     }
 }
