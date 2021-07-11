@@ -12,15 +12,10 @@ namespace HackAssembler
         {
             _table = GetDefaultSymbols();
             _symbolParser = new SymbolParser();
-            ParseCodeForLabelSymbols(codeLines, _table);
-
-            foreach (var pair in _table)
-            {
-                Console.WriteLine($"Symbol: {pair.Key}. Value: {pair.Value}");
-            }
+            ParseCodeForLabelSymbols(codeLines);
         }
 
-        private void ParseCodeForLabelSymbols(IEnumerable<string> codeLines, Dictionary<string, int> symbolsTable)
+        private void ParseCodeForLabelSymbols(IEnumerable<string> codeLines)
         {
             var lineIndex = 0;
             foreach (var codeLine in codeLines)
@@ -31,7 +26,7 @@ namespace HackAssembler
                     AddLabelSymbol(symbol, lineIndex);
                     continue;
                 }
-                
+
                 lineIndex++;
             }
         }
@@ -75,28 +70,5 @@ namespace HackAssembler
                 {"THIS", 4},
                 {"THAT", 5},
             };
-    }
-    
-    public class SymbolParser{
-        
-        public bool IsLabelSymbol(string codeLine) => 
-            codeLine[0] == '(' && codeLine[^1] == ')';
-        
-        public bool IsVariableSymbol(string codeLine)
-        {
-            if (codeLine[0] != '@')
-                return false;
-            
-            if (int.TryParse(codeLine.Substring(1), out _))
-                return false;
-            
-            return true;
-        }
-
-        public string GetLabelSymbol(string codeLine) => 
-            codeLine.Substring(1, codeLine.Length - 2);
-        
-        public string GetVariableSymbol(string codeLine) => 
-            codeLine.Substring(1, codeLine.Length - 1);
     }
 }
