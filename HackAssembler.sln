@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackAssembler", "HackAssembler\HackAssembler.csproj", "{C8ACD0F2-F7FD-4E7C-B2C3-34CFA478B437}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblerTest", "AssemblerTest\AssemblerTest.csproj", "{7553DB4B-0DB4-4DDF-AE3E-CD9F3D72DFCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,13 @@ Global
 		{C8ACD0F2-F7FD-4E7C-B2C3-34CFA478B437}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8ACD0F2-F7FD-4E7C-B2C3-34CFA478B437}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8ACD0F2-F7FD-4E7C-B2C3-34CFA478B437}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E938B08-274E-4762-AAD3-7DE06095C557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E938B08-274E-4762-AAD3-7DE06095C557}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E938B08-274E-4762-AAD3-7DE06095C557}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E938B08-274E-4762-AAD3-7DE06095C557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7553DB4B-0DB4-4DDF-AE3E-CD9F3D72DFCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7553DB4B-0DB4-4DDF-AE3E-CD9F3D72DFCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7553DB4B-0DB4-4DDF-AE3E-CD9F3D72DFCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7553DB4B-0DB4-4DDF-AE3E-CD9F3D72DFCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
