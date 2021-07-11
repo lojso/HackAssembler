@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 
 namespace HackAssembler
@@ -42,10 +43,27 @@ namespace HackAssembler
             string line; 
             while ((line = file.ReadLine()) != null)
             {
-                yield return line;
+                var parsedLine = RemoveWhitespace(line);
+                parsedLine = RemoveComments(parsedLine);
+                if(parsedLine.Length != 0)
+                    yield return parsedLine;
             }
         }
-        
-        
+
+        private string RemoveWhitespace(string input)
+        {
+            return new string(input
+                .Where(c => !Char.IsWhiteSpace(c))
+                .ToArray());
+        }
+
+        private string RemoveComments(string line)
+        {
+            var commentSymbol = "//";
+            var firstOccurence = line.IndexOf(commentSymbol, StringComparison.Ordinal);
+            if (firstOccurence == -1)
+                return line;
+            return line.Substring(0, firstOccurence);
+        }
     }
 }
