@@ -21,5 +21,10 @@
 
         public string GetVariableSymbol(string codeLine) =>
             codeLine.Substring(1, codeLine.Length - 1);
+
+        public void AddVariableSymbol(string symbol)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

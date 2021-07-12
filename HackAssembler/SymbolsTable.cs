@@ -5,8 +5,8 @@ namespace HackAssembler
 {
     public class SymbolsTable
     {
-        private Dictionary<string, int> _table;
         private readonly SymbolParser _symbolParser;
+        private Dictionary<string, int> _table;
 
         public SymbolsTable(IEnumerable<string> codeLines)
         {
@@ -70,5 +70,11 @@ namespace HackAssembler
                 {"THIS", 4},
                 {"THAT", 5},
             };
+
+        public bool ContainSymbol(string symbol) =>
+            _table.ContainsKey(symbol);
+
+        public int GetSymbolValue(string symbol) =>
+            _table[symbol];
     }
 }
