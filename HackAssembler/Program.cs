@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace HackAssembler
 {
@@ -14,13 +15,17 @@ namespace HackAssembler
             var hackParser = new HackParser(_arguments.Path);
 
             _symbolsTable = new SymbolsTable(hackParser.CodeListing());
+
             var symbolParser = new SymbolParser();
+
             var codeListing = new CodeListing(
                 hackParser.CodeListing(),
                 symbolParser,
                 new CommandFactory(symbolParser, _symbolsTable),
                 _symbolsTable
             );
+
+            string byteCodeListing = codeListing.ToByteCode();
         }
     }
 
@@ -50,6 +55,17 @@ namespace HackAssembler
             var symbol = symbolParser.GetVariableSymbol(codeLine);
             if (table.ContainSymbol(symbol) == false)
                 table.AddSymbol(symbol);
+        }
+
+        public string ToByteCode()
+        {
+            string byteCode = "";
+            foreach (var command in _commands)
+                byteCode += command.ToByteCode() + Environment.NewLine;
+
+            byteCode.TrimEnd();
+
+            return byteCode;
         }
     }
 }
