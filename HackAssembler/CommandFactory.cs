@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HackAssembler
+﻿namespace HackAssembler
 {
     public class CommandFactory
     {
@@ -18,9 +16,7 @@ namespace HackAssembler
         {
             if (_commandParser.IsACommand(codeLine))
                 return new ACommand(codeLine, _symbolsTable, _symbolParser, _commandParser);
-            if (_commandParser.IsCCommand(codeLine))
-                return new CCommand(codeLine, _commandParser);
-            throw new ArgumentException($"Unknown command: {codeLine}");
+            return new CCommand(codeLine, _commandParser);
         }
     }
 }

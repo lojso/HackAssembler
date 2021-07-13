@@ -5,13 +5,16 @@ namespace HackAssembler
 {
     public class SymbolsTable
     {
+        private const int StartPosition = 16;
         private readonly SymbolParser _symbolParser;
+        private int _position;
         private Dictionary<string, int> _table;
 
         public SymbolsTable(IEnumerable<string> codeLines)
         {
             _table = GetDefaultSymbols();
             _symbolParser = new SymbolParser();
+            _position = StartPosition;
             ParseCodeForLabelSymbols(codeLines);
         }
 
@@ -76,5 +79,16 @@ namespace HackAssembler
 
         public int GetSymbolValue(string symbol) =>
             _table[symbol];
+
+        public void AddSymbol(string symbol)
+        {
+            if (ContainSymbol(symbol))
+                throw new ArgumentException($"Table already contains symbol {symbol}");
+
+            _table[symbol] = GetNexPosition();
+        }
+
+        private int GetNexPosition() =>
+            _position++;
     }
 }

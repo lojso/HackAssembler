@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace HackAssembler
 {
@@ -19,26 +18,38 @@ namespace HackAssembler
             var codeListing = new CodeListing(
                 hackParser.CodeListing(),
                 symbolParser,
-                new CommandFactory(symbolParser, _symbolsTable));
+                new CommandFactory(symbolParser, _symbolsTable),
+                _symbolsTable
+            );
         }
     }
 
     public class CodeListing
     {
-        private readonly SymbolParser _symbolParser;
-
         private List<Command> _commands = new List<Command>();
-        private CommandFactory _factory;
 
-        public CodeListing(IEnumerable<string> codeListing, SymbolParser symbolParser, CommandFactory factory)
+        public CodeListing(IEnumerable<string> codeListing, SymbolParser symbolParser, CommandFactory factory,
+            SymbolsTable table)
         {
-            _symbolParser = symbolParser;
-            _factory = factory;
-
             foreach (var codeLine in codeListing)
             {
-                Console.WriteLine(_factory.CreateCommand(codeLine).ToString());
+                if (symbolParser.IsLabelSymbol(codeLine))
+                    continue;
+
+                AddVariableSymbol(symbolParser, table, codeLine);
+
+                _commands.Add(factory.CreateCommand(codeLine));
             }
+        }
+
+        private static void AddVariableSymbol(SymbolParser symbolParser, SymbolsTable table, string codeLine)
+        {
+            if (!symbolParser.IsVariableSymbol(codeLine))
+                return;
+
+            var symbol = symbolParser.GetVariableSymbol(codeLine);
+            if (table.ContainSymbol(symbol) == false)
+                table.AddSymbol(symbol);
         }
     }
 }

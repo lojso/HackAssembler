@@ -2,9 +2,6 @@
 {
     public class CommandParser
     {
-        public bool IsCCommand(string codeLine) =>
-            !IsACommand(codeLine);
-
         public bool IsACommand(string codeLine) =>
             codeLine[0] == '@';
 
