@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HackAssembler.Commands;
 
 namespace HackAssembler
 {
@@ -63,9 +64,7 @@ namespace HackAssembler
             foreach (var command in _commands)
                 byteCode += command.ToByteCode() + Environment.NewLine;
 
-            byteCode.TrimEnd();
-
-            return byteCode;
+            return byteCode.TrimEnd(Environment.NewLine.ToCharArray());
         }
     }
 }

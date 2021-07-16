@@ -1,4 +1,4 @@
-﻿namespace HackAssembler
+﻿namespace HackAssembler.Commands
 {
     public class CommandFactory
     {
