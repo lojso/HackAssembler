@@ -36,14 +36,10 @@ namespace HackAssembler
 
         private void AddLabelSymbol(string symbol, int lineIndex)
         {
-            if (_table.ContainsKey(symbol) == false)
-            {
-                _table[symbol] = lineIndex;
-            }
-            else
-            {
+            if (_table.ContainsKey(symbol))
                 throw new FormatException($"{symbol} label duplicate at line {lineIndex}");
-            }
+
+            _table[symbol] = lineIndex;
         }
 
         private Dictionary<string, int> GetDefaultSymbols() =>
